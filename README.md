@@ -1,7 +1,9 @@
 # Foresight AI: Revenue Optimization Intelligence for Boutique Hotels
+
 <hr/>
 
 # Team
+
 Rishi Dilip (Product Manager)
 Sally Piggot (Client)
 Madhav Mair (Backend Developer)
