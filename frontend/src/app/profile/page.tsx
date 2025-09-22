@@ -3,17 +3,17 @@ import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Dashboard"
+  title: "Profile"
 };
 
-function Dashboard() {
+function Profile() {
   return (
     <>
       <main className="min-h-screen flex flex-col items-center justify-center px-4 py-8 bg-gray-50">
-        <h1 className="text-4xl font-bold mb-6">Dashboard</h1>
+        <h1 className="text-4xl font-bold mb-6">Profile</h1>
       </main>
     </>
   );
 }
 
-export default Dashboard;
+export default Profile;
