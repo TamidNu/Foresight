@@ -4,7 +4,9 @@ import type { Metadata } from "next";
 const nameTextClass = "mt-2 text-lg font-medium";
 const roleTextClass = "text-sm text-gray-600";
 
-export const metadata: Metadata = { title: "About" };
+export const metadata: Metadata = { 
+  title: "About",
+};
 
 function About() {
   return (
@@ -22,20 +24,20 @@ function About() {
         <h1 className="text-4xl font-bold mb-8">Meet the Team</h1>
       {/* Top row: 5 people */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
-        <Person img="/team1.jpg" name="Adit Karode" role="VP of Tech Consulting" />
-        <Person img="/team2.jpg" name="Jeff Krapf" role="Director of Tech Consulting" />
-        <Person img="/team3.jpg" name="Rishi Dilip" role="Project Manager" />
-        <Person img="/team4.jpg" name="Naman Rusia" role="Tech Lead" />
-        <Person img="/team5.jpg" name="Madhav Nair" role="Developer" />
+        <Person img="/team imgs/adit_tc.jpeg" name="Adit Karode" role="VP of Tech Consulting" />
+        <Person img="/team imgs/jeff_tc.jpeg" name="Jeff Krapf" role="Director of Tech Consulting" />
+        <Person img="/team imgs/rishi_tc.jpeg" name="Rishi Dilip" role="Project Manager" />
+        <Person img="/team imgs/naman_tc.jpeg" name="Naman Rusia" role="Tech Lead" />
+        <Person img="/team imgs/madhav_tc.jpeg" name="Madhav Nair" role="Developer" />
       </div>
 
       {/* Bottom row: 5 people */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-        <Person img="/team6.jpg" name="Aditya Patwal" role="Developer" />
-        <Person img="/team7.jpg" name="Brianna Quinn" role="Developer" />
-        <Person img="/team8.jpg" name="Bhuvan Hospet" role="Developer" />
-        <Person img="/team9.jpg" name="Anya Krishnamony" role="Developer" />
-        <Person img="/team10.jpg" name="Ioanna Damianov" role="Developer" />
+        <Person img="/team imgs/aditya_tc.jpeg" name="Aditya Patwal" role="Developer" />
+        <Person img="/team imgs/brianna_tc.jpeg" name="Brianna Quinn" role="Developer" />
+        <Person img="/team imgs/bhuvan_tc.jpeg" name="Bhuvan Hospet" role="Developer" />
+        <Person img="/team imgs/anya_tc.jpeg" name="Anya Krishnamony" role="Developer" />
+        <Person img="/team imgs/ioanna_tc.jpeg" name="Ioanna Damianov" role="Developer" />
       </div>
     </main>
   );
