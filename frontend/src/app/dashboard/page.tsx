@@ -13,11 +13,11 @@ function Dashboard() {
         <div>
           <p className="text-med mb-2">Date</p>
           <h2 className="font-bold">Property Name</h2>
-          <p className="text-med mb-2">name</p>
+          <p className="text-med text-[#4981d6] mb-2">Name</p>
         </div>
         <div>
           <p className="font-semibold">Occupancy (Next 7 Days)</p>
-          <p className="text-xl mb-2">00%</p>
+          <p className="text-xl text-[#4981d6] mb-2">00%</p>
         </div>
         <div>
           <p className="font-semibold">Revenue (MTD)</p>
@@ -35,14 +35,14 @@ function Dashboard() {
       <main className="flex-1 p-6 space-y-6">
         <h1 className="text-xl font-bold">Revenue Command Center</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className={`bg-white border ${borderColor} rounded shadow`}>
+          <div className={`bg-[#e8f1ff] border border-[#aecaf5] rounded shadow`}>
             <div className="p-4">
-              <p className="text-sm text-gray-500">Incremental Revenue</p>
+              <p className="text-med text-gray-500">Incremental Revenue</p>
             </div>
           </div>
-          <div className={`bg-white border ${borderColor} rounded shadow`}>
+          <div className={`bg-[#e8f1ff] border border-[#aecaf5] rounded shadow`}>
             <div className="p-4">
-              <p className="text-sm text-gray-500">Intelligence Signals</p>
+              <p className="text-med text-gray-500">Intelligence Signals</p>
             </div>
           </div>
         </div>
