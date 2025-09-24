@@ -27,7 +27,10 @@ function Dashboard() {
           <div className="bg-yellow-100 border-l-4 border-yellow-500 p-2 mb-2">
             <p className="text-sm">Event</p>
           </div>
-          <div className="bg-red-100 border-l-4 border-red-500 p-2">
+          <div className="bg-red-100 border-l-4 border-red-500 p-2 mb-2">
+            <p className="text-sm">Event</p>
+          </div>
+          <div className="bg-green-100 border-l-4 border-green-500 p-2 mb-2">
             <p className="text-sm">Event</p>
           </div>
         </div>

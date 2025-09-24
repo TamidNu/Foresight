@@ -15,7 +15,7 @@ export default function AnimatedButton() {
   if (!showButton) return null;
 
   return (
-    <Link href="/about" passHref>
+    <Link href="/dashboard" passHref>
       <button className="bg-[#013172] text-white text-lg md:text-xl font-semibold px-8 md:px-10 py-3 md:py-4 rounded-full shadow-xl hover:bg-[#014495] hover:scale-105 transition-transform animate-fade-in">
         explore
       </button>
