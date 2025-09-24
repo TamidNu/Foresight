@@ -2,8 +2,8 @@
 import type { Metadata } from "next";
 import { League_Spartan } from 'next/font/google';
 import Head from 'next/head';
-import Navbar from "./components/navbar";
-import Footer from "./components/footer";
+import Navbar from "../../components/navbar";
+import Footer from "../../components/footer";
 import "./globals.css";
 import { usePathname } from "next/navigation";
 

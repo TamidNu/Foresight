@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import type { Metadata } from "next";
-import Typewriter from "./components/typewriter";
-import AnimatedButton from "./components/animated-button";
+import Typewriter from "../../components/typewriter";
+import AnimatedButton from "../../components/animated-button";
 
 export const metadata: Metadata = {
   title: "Foresight",
