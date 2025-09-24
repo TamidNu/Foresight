@@ -1,11 +1,14 @@
 "use client";
 
 import React from "react";
+import { useState } from "react";
+import ProgressBar from "../../../../components/progress-bar";
 
 function Dashboard() {
   const textColor = "text-[#013172]"; 
   const borderColor = "border-[#D1D5DB]"; 
   const fontClass = "font-sans";
+
 
   return (
     <div className={`flex flex-1 ${textColor} ${fontClass}`}>
@@ -17,10 +20,12 @@ function Dashboard() {
         </div>
         <div>
           <p className="font-semibold">Occupancy (Next 7 Days)</p>
-          <p className="text-xl text-[#4981d6] mb-2">00%</p>
+          <p className="text-xl text-[#4981d6] mb-2">{50}%</p>
+          <ProgressBar progress={50} />
         </div>
         <div>
           <p className="font-semibold">Revenue (MTD)</p>
+          <p className="text-xl text-[#4981d6] mb-2">$0</p>
         </div>
         <div>
           <p className="font-semibold">Active Alerts</p>
