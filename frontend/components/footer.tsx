@@ -1,19 +1,20 @@
 export default function Footer() {
   return (
     <footer className="w-full bg-[#013172] text-white py-4 px-6">
-      <div className="flex flex-col md:flex-row items-center justify-between w-full text-sm">
-        {/* Left corner */}
-        <p className="md:text-left w-full md:w-auto">
-          stop reacting to demand. start predicting it.
-        </p>
+      <div className="grid grid-cols-1 md:grid-cols-3 items-center text-sm">
+        
+        {/* Left slogan */}
+        <div className="flex justify-center md:justify-start mb-2 md:mb-0">
+          <p>stop reacting to demand. start predicting it.</p>
+        </div>
 
-        {/* Center */}
-        <p className="text-center w-full md:w-auto">
-          © 2025 foresight. All rights reserved.
-        </p>
+        {/* Center copyright */}
+        <div className="flex justify-center mb-2 md:mb-0">
+          <p>© 2025 foresight. All rights reserved.</p>
+        </div>
 
-        {/* Right corner */}
-        <div className="flex space-x-6 mt-2 md:mt-0 w-full md:w-auto justify-center md:justify-end">
+        {/* Right links */}
+        <div className="flex justify-center md:justify-end space-x-6">
           <a href="/about" className="hover:underline">
             About
           </a>

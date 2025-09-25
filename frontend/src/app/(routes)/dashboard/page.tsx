@@ -1,8 +1,10 @@
-"use client";
-
 import React from "react";
-import { useState } from "react";
 import ProgressBar from "../../../../components/progress-bar";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { 
+  title: "Dashboard",
+};
 
 function Dashboard() {
   const textColor = "text-[#013172]"; 
@@ -20,8 +22,8 @@ function Dashboard() {
         </div>
         <div>
           <p className="font-semibold">Occupancy (Next 7 Days)</p>
-          <p className="text-xl text-[#4981d6] mb-2">{50}%</p>
-          <ProgressBar progress={50} />
+          <p className="text-xl text-[#4981d6] mb-2">{10}%</p>
+          <ProgressBar progress={10} />
         </div>
         <div>
           <p className="font-semibold">Revenue (MTD)</p>

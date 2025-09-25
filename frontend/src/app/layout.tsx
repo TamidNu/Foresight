@@ -22,8 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={leagueSpartan.variable}>
       <Head>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <title>Foresight</title>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
       </Head>
       <body className={`${leagueSpartan.className} flex flex-col min-h-screen`}>
         {pathname !== "/" && <Navbar />}
