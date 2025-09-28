@@ -24,9 +24,6 @@ const Navbar = () => {
         {/* Navigation Links */}
         <ul className="flex justify-center space-x-6">
           <li>
-            <Link href="/" className="hover:text-gray-300">Home</Link>
-          </li>
-          <li>
             <Link href="/about" className="hover:text-gray-300">About</Link>
           </li>
           <li>

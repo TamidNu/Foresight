@@ -38,8 +38,13 @@ export default function RootLayout({
       <body className={`${leagueSpartan.className} flex flex-col min-h-screen`}>
         <SignedOut>
               <SignInButton />
-              <SignUpButton></SignUpButton>
+              <SignUpButton>
+                <button className="hover:text-gray-300">Sign Up</button>
+              </SignUpButton>
         </SignedOut>
+         <SignedIn>
+              <UserButton />
+            </SignedIn>
         <Navbar />
         <main className="flex-1 flex">{children}</main>
         <Footer />
