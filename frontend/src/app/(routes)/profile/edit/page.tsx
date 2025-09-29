@@ -50,12 +50,12 @@ export default function EditProfilePage() {
             className="mt-1 p-2 w-full border rounded"
           />
         </div>
-
+        
         <div>
-          <label className="block font-medium text-gray-700">Username</label>
+          <label className="block font-medium text-gray-700">Hotel Name</label>
           <input
             type="text"
-            defaultValue={user.username || ""}
+            defaultValue="hotel"
             className="mt-1 p-2 w-full border rounded"
           />
         </div>
@@ -65,6 +65,15 @@ export default function EditProfilePage() {
           <input
             type="email"
             defaultValue={user.primaryEmailAddress?.emailAddress || ""}
+            className="mt-1 p-2 w-full border rounded"
+          />
+        </div>
+        
+                <div>
+          <label className="block font-medium text-gray-700">Phone Number</label>
+          <input
+            type="tel"
+            defaultValue={user.phoneNumbers?.[0]?.phoneNumber || ""}
             className="mt-1 p-2 w-full border rounded"
           />
         </div>

@@ -48,13 +48,19 @@ export default function ProfilePage() {
           <p>{user.primaryEmailAddress?.emailAddress || "-"}</p>
         </div>
         <div>
-          <h2 className="font-medium text-gray-700">Username</h2>
-          <p>{user.username || "-"}</p>
+          <h2 className="font-medium text-gray-700">Hotel Name</h2>
+          <p>Hotel</p>
+        </div>
+        <div>
+          <h2 className="font-medium text-gray-700">Phone Number</h2>
+          <p>{user.phoneNumbers?.[0]?.phoneNumber || "-"}</p>
         </div>
           <Link
            href="/profile/edit" className="mt-6 inline-block bg-[#013172] text-white px-6 py-3 rounded-full hover:bg-blue-800 transition-colors">
              Edit Profile
           </Link>
+
+
       </div>
     </div>
   );
