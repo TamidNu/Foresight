@@ -1,0 +1,8 @@
+node_modules/
+.env
+.env.local
+frontend/node_modules/
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+frontend/.clerk/
