@@ -1,20 +1,10 @@
-"use client";
 import type { Metadata } from "next";
 import { League_Spartan } from 'next/font/google';
-import Head from 'next/head';
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
+import AuthWrapper from "../../components/auth-wrapper";
 import "./globals.css";
-import { usePathname } from "next/navigation";
 
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
 
 const leagueSpartan = League_Spartan({
   subsets: ['latin'],
@@ -22,34 +12,28 @@ const leagueSpartan = League_Spartan({
   variable: '--font-league-spartan',
 });
 
+export const metadata: Metadata = {
+  title: "Foresight",
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
   return (
-    <ClerkProvider>
-    <html lang="en" className={leagueSpartan.variable}>
-      <Head>
-        <title>Foresight</title>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </Head>
+        <html lang="en" className={leagueSpartan.variable}>
       <body className={`${leagueSpartan.className} flex flex-col min-h-screen`}>
-        <SignedOut>
-              <SignInButton />
-              <SignUpButton>
-                <button className="hover:text-gray-300">Sign Up</button>
-              </SignUpButton>
-        </SignedOut>
-         <SignedIn>
-              <UserButton />
-            </SignedIn>
-        <Navbar />
-        <main className="flex-1 flex">{children}</main>
-        <Footer />
+        <AuthWrapper>
+          <Navbar />
+          <main className="flex-1 flex">{children}</main>
+          <Footer />
+        </AuthWrapper>
       </body>
     </html>
-    </ClerkProvider>
   );
 }
