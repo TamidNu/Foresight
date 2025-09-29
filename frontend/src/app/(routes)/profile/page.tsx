@@ -7,7 +7,9 @@ import Link from "next/link";
 export default function ProfilePage() {
   const { user } = useUser();
 
-  if (!user) return <p className="text-center mt-12">Loading...</p>;
+  if (!user) return <div className="flex items-center justify-center w-screen h-screen"> <p className="text-center text-lg font-medium">Loading...</p> </div>
+
+
 
   return (
     <div className="max-w-3xl mx-auto mt-12 p-6 bg-white shadow rounded-lg">
