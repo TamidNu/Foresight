@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser, SignInButton, SignedIn } from "@clerk/nextjs";
+import { useUser, SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -12,7 +12,7 @@ import {
   getHotelName,
   getPrimaryEmail,
   getPhoneNumber,
-} from "../../../api/user";
+} from "../../../utils/user";
 
 export default function ProfilePage() {
   const { user } = useUser();
@@ -31,8 +31,7 @@ export default function ProfilePage() {
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-gray-50">
-      {/* If not signed in → show Clerk login modal */}
-      {!user && (
+      <SignedOut>
         <div className="flex flex-col items-center space-y-4">
           <p className="text-center text-lg font-medium">Please sign in</p>
           <SignInButton mode="modal">
@@ -41,9 +40,7 @@ export default function ProfilePage() {
             </button>
           </SignInButton>
         </div>
-      )}
-
-      {/* If signed in → full profile */}
+      </SignedOut>
       <SignedIn>
         <div className="relative max-w-3xl p-6 bg-white shadow rounded-lg">
           <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-[#013172] text-white px-6 py-2 rounded-full text-lg font-semibold shadow-lg">
