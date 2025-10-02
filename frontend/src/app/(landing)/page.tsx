@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Typewriter from "../components/typewriter";
+import Typewriter from "../../components/typewriter";
 import {
   SignedIn,
   SignedOut,
