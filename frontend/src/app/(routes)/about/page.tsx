@@ -4,8 +4,17 @@ import type { Metadata } from "next";
 const nameTextClass = "mt-2 text-lg font-medium";
 const roleTextClass = "text-sm text-gray-600";
 
-export const metadata: Metadata = { 
+export const metadata: Metadata = {
   title: "About",
+  description:
+    "Description here",
+  openGraph: {
+    title: "About | Foresight",
+    description:
+      "Description here",
+    url: "https://foresight-tamid.vercel.app/about", 
+    siteName: "Foresight",
+  }
 };
 
 function About() {
