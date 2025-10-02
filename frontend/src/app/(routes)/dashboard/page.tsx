@@ -1,5 +1,5 @@
 import React from "react";
-import ProgressBar from "../../../../components/progress-bar";
+import ProgressBar from "../../../components/progress-bar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
