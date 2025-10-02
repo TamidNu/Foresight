@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { League_Spartan } from "next/font/google";
-import Navbar from "../../components/navbar";
-import Footer from "../../components/footer";
-import AuthWrapper from "../../components/auth-wrapper";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
+import AuthWrapper from "../components/auth-wrapper";
 import "./globals.css";
 import { currentUser } from "@clerk/nextjs/server";
 
