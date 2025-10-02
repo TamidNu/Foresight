@@ -1,4 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
+from sqlalchemy.orm import Session
+from sqlalchemy import text
+from app.repositories.database import get_db
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
@@ -24,8 +27,23 @@ async def hello():
     return {"message": "Hello, World!", "status": "success"}
 
 @app.get("/")
-async def root():
-    return {"message": "api works!"}
+def read_root(db: Session = Depends(get_db)):
+    # Your database queries here
+    return {"message": "Connected to Neon!"}
+
+@app.get("/db-info")
+def get_db_info(db: Session = Depends(get_db)):
+    try:
+        # Get database name
+        result = db.execute(text("SELECT current_database();"))
+        db_name = result.fetchone()[0]
+        
+        return {
+            "status": "connected",
+            "database": db_name,
+        }
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
