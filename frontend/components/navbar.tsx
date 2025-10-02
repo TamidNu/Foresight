@@ -1,16 +1,13 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { UserButton, SignInButton, SignUpButton } from "@clerk/nextjs";
+import type { User } from "@clerk/nextjs/server";
 
-export default function Navbar() {
+interface NavbarProps {
+  user: User | null;
+}
+
+export default function Navbar({ user }: NavbarProps) {
   return (
     <nav style={{ backgroundColor: "#013172" }} className="text-white p-4">
       <div className="w-full grid grid-cols-3 items-center">
@@ -30,45 +27,71 @@ export default function Navbar() {
 
         {/* Navigation Links */}
         <ul className="flex justify-center space-x-6">
-          <li><Link href="/about" className="hover:text-gray-300">About</Link></li>
-          <li><Link href="/dashboard" className="hover:text-gray-300">Dashboard</Link></li>
-          <li><Link href="/calendar" className="hover:text-gray-300">Calendar</Link></li>
-          <li><Link href="/reports" className="hover:text-gray-300">Reports</Link></li>
-          <li><Link href="/intelligence" className="hover:text-gray-300">Intelligence</Link></li>
+          {/* Always accessible */}
+          <li>
+            <Link href="/about" className="hover:text-gray-300">
+              About
+            </Link>
+          </li>
+
+          {user ? (
+            <>
+              <li><Link href="/dashboard" className="hover:text-gray-300">Dashboard</Link></li>
+              <li><Link href="/calendar" className="hover:text-gray-300">Calendar</Link></li>
+              <li><Link href="/reports" className="hover:text-gray-300">Reports</Link></li>
+              <li><Link href="/intelligence" className="hover:text-gray-300">Intelligence</Link></li>
+            </>
+          ) : (
+            <>
+              <li>
+                <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+                  <button className="hover:text-gray-300">Dashboard</button>
+                </SignInButton>
+              </li>
+              <li>
+                <SignInButton mode="modal" forceRedirectUrl="/calendar">
+                  <button className="hover:text-gray-300">Calendar</button>
+                </SignInButton>
+              </li>
+              <li>
+                <SignInButton mode="modal" forceRedirectUrl="/reports">
+                  <button className="hover:text-gray-300">Reports</button>
+                </SignInButton>
+              </li>
+              <li>
+                <SignInButton mode="modal" forceRedirectUrl="/intelligence">
+                  <button className="hover:text-gray-300">Intelligence</button>
+                </SignInButton>
+              </li>
+            </>
+          )}
         </ul>
 
         {/* Auth Section */}
-<div className="flex justify-end gap-x-6">
-  <SignedOut>
-    <div className="flex gap-x-6">
-      <SignInButton mode="modal">
-        <button className="hover:text-gray-300 transition-colors">
-          Sign In
-        </button>
-      </SignInButton>
-      <SignUpButton mode="modal">
-        <button className="hover:text-gray-300 transition-colors">
-          Sign Up
-        </button>
-      </SignUpButton>
-    </div>
-  </SignedOut>
-<SignedIn>
-  <UserButton
-    userProfileMode="navigation"
-    userProfileUrl="/profile"
-    appearance={{
-      elements: {
-        avatarBox: {
-          width: "40px",
-          height: "40px",
-        },
-      },
-    }}
-  />
-</SignedIn>
-
-</div>
+        <div className="flex justify-end gap-x-6">
+          {user ? (
+            <UserButton
+              userProfileMode="navigation"
+              userProfileUrl="/profile"
+              appearance={{
+                elements: { avatarBox: { width: "40px", height: "40px" } },
+              }}
+            />
+          ) : (
+            <div className="flex gap-x-6">
+              <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+                <button className="hover:text-gray-300 transition-colors">
+                  Sign In
+                </button>
+              </SignInButton>
+              <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
+                <button className="hover:text-gray-300 transition-colors">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );

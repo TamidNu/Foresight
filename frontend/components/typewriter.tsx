@@ -49,7 +49,7 @@ export default function Typewriter() {
   }, []);
 
   return (
-    <p className="text-xl md:text-2xl text-[#000000] opacity-0 animate-fade-in delay-300 mt-2">
+    <p className="text-xl md:text-2xl text-[#000000] opacity-0 animate-fade-up delay-400 mt-2">
       {subtitle}
       <span
         className={`inline-block w-1 ml-1 bg-black ${
@@ -58,4 +58,5 @@ export default function Typewriter() {
       ></span>
     </p>
   );
+  
 }
