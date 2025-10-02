@@ -5,14 +5,14 @@
 # Team
 
 Rishi Dilip (Product Manager)
-Sally Piggot (Client)
+Naman Rusia (Technical Lead)
 Madhav Mair (Backend Developer)
 Aditya Patwal (Backend Developer)
 Brianna Quinn (Data Science/ML developer)
 Bhuvan Hospet (Data Science/ML developer)
 Anya Krishnamony (Frontend Developer)
 Ioanna Damianov (Frontend Developer)
-Naman Rusia (Technical Lead)
+Sally Piggot (Client POC)
 Adit Karode (Advisor)
 Jeff Krapf (Advisor)
 
@@ -42,21 +42,23 @@ We’re aiming to deliver a solid foundation of Foresight this semester by compl
 
 | Component                                           | Status                                    |
 | --------------------------------------------------- | ----------------------------------------- |
-| Historical Data Upload + Validation                 | MVP 0 core                                |
-| Baseline AI Model & Price Recommendations           | MVP 0 core                                |
-| Results Table & CSV Export                          | MVP 0 core                                |
-| Login / Authentication                              | 🔧 Basic version in place                 |
-| UI Skeleton (Pages for Dashboard / Recommendations) | 🔧 Initial wireframes, design in progress |
+| Historical Data Upload + Cleaning                   | MVP 0 - Complete                          |
+| DB Research + Setup + Connection to Frontend        | MVP 0 - Complete                          |
+| Basic Data Analytics                                | MVP 0 - Complete                          |
+| Login / Authentication                              | MVP 0 - Complete                          |
+| UI Skeleton (Pages for Dashboard / Recommendations) | MVP 0 - Complete                          |
+| Basic Devops setup/ CI/CD + PR Code Rabit           | MVP 0 - Complete                          |
 
 ---
 
 ## 🔭 Next Milestones
 
-1. **Pilot Feedback** — get real feedback from the hotel whose historical data we have.
-2. **Add Event & Seasonality Features** — let manager mark events; factor into pricing.
-3. **Dashboard & Calendar Views** — visual tools to see upcoming periods, pricing suggestions, flagged dates.
-4. **PMS Integration (Read-Only)** — ingest live reservation & availability data; sync status in UI.
-5. **Code Quality & Dev Tools** — complete CI/CD setup, apply formatting and linting rules, expand tests.
+1. **Basline ML model** — Using the data available create a prediction model for pricing
+2. **Data Scrape** — Scrape other travel sites to get more data on travel pricing and historical data to tune model
+3. **Update Dashboard Skeleton** use the basic data analytics and integrate the analytics to the dashboard
+4. **Dashboard & Calendar Views** — visual tools to see upcoming periods, pricing suggestions, flagged dates.
+5. **PMS Integration (Read-Only)** — ingest live reservation & availability data; sync status in UI.
+
 
 ---
 
