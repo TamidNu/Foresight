@@ -5,3 +5,4 @@
 - Fully understand RESTful APIs (what do they mean?)
 - api should be in utils
 - ask naman if you have any more questions. 
+https://www.youtube.com/watch?v=I2Bgi0Qcdvc

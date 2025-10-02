@@ -12,7 +12,7 @@ import {
   getHotelName,
   getPrimaryEmail,
   getPhoneNumber,
-} from "../../../api/user";
+} from "../../../utils/user";
 
 export default function ProfilePage() {
   const { user } = useUser();
