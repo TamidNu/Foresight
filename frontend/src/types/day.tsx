@@ -1,5 +1,5 @@
 export interface IDay {
-    dayOfTheWeek: String;
-    dayOfTheMonth: number;
+    weekday: String;
+    numMonthDay: number;
     demand: number;
 }
