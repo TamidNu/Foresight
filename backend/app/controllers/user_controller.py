@@ -20,3 +20,11 @@ def signup(payload: UserCreateRequest, svc: UserService = Depends(_svc)):
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
     except DuplicateUserError as e:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
+
+# this will be the endpoint to get user details by user ID
+@router.get("/{user_id}", response_model=UserResponse)
+def get_user(user_id: int, svc: UserService = Depends(_svc)):
+    user = svc.get_user_by_id(user_id)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    return user
