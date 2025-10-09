@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   }
 };
 
-export async function Dashboard() {
+async function Dashboard() {
   const user = await currentUser();
 
   console.log(
