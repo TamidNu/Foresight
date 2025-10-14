@@ -1,6 +1,6 @@
 import { IDay } from "./day";
 
 export interface ICalendar {
-    month: String;
+    month: string; // primitive type
     days: IDay[][];
 }
