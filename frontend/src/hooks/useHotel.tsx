@@ -7,6 +7,7 @@ export function useHotel() {
      * - create a new hotel
      * - update an existing hotel
      * - delete a hotel
+     * - get the calendar from the hotel
      * - set the current hotel that is being viewed (on dashboard)
     */ 
     
