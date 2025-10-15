@@ -22,7 +22,7 @@ function Dashboard() {
 
 
   return (
-    <div className={`flex flex-1 ${textColor} ${fontClass}`}>
+    <div className={`flex flex-1 ${textColor}`}>
       <aside className={`w-72 bg-white border-r ${borderColor} p-4 space-y-4`}>
         <div>
           <p className="text-med mb-2">Date</p>
