@@ -10,8 +10,8 @@ interface CalendarProps {
 }
 
 export default function CalendarComponent({ month, year }: CalendarProps) {
-  //  const textColor = "text-[#013172]"; 
-  //  const borderColor = "border-[#D1D5DB]"; 
+  //  const textColor = "text-[#013172]"; [#D1D5DB]
+  const borderColor = "border-3 border-blue-500"; 
 
   const calendar: ICalendar = generateCalendar(month, year);
 
@@ -55,8 +55,8 @@ export default function CalendarComponent({ month, year }: CalendarProps) {
               {week.map((day, dayIdx) => (
                 <div
                   key={dayIdx}
-                  className={`py-6 text-lg sm:text-xl font-semibold text-center border border-gray-200 rounded 
-                    ${getDemandColor(day.demand)} `}>
+                  className={`py-6 text-lg sm:text-xl font-semibold text-center rounded 
+                    ${getDemandColor(day.demand)} ${isToday(day.date) ? borderColor : "border border-gray-200"}`}>
                   {day.numMonthDay || ""}
                 </div>
               ))}
@@ -75,4 +75,15 @@ function getDemandColor(demand?: number) {
   if (demand < 0.5) return "bg-yellow-300";      // medium-low
   if (demand < 0.75) return "bg-orange-400";     // medium-high
   return "bg-red-500";                            // high demand
+}
+
+function isToday(date?: Date | null) {
+  if (!date) return false;
+
+  const today = new Date();
+  return (
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear()
+  );
 }
