@@ -10,7 +10,6 @@ export const metadata: Metadata = {
     title: "Dashboard | Foresight",
     description:
       "Description here",
-    url: "https://foresight-tamid.vercel.app/dashboard", 
     siteName: "Foresight",
   }
 };
