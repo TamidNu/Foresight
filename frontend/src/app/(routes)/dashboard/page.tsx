@@ -1,6 +1,8 @@
 import React from "react";
 import ProgressBar from "../../../components/progress-bar";
 import type { Metadata } from "next";
+import { currentUser } from "@clerk/nextjs/server";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -10,19 +12,45 @@ export const metadata: Metadata = {
     title: "Dashboard | Foresight",
     description:
       "Description here",
-    url: "https://foresight-tamid.vercel.app/dashboard", 
+    url: "https://foresight-tamid.vercel.app/dashboard",
     siteName: "Foresight",
   }
 };
 
-function Dashboard() {
-  const textColor = "text-[#013172]"; 
-  const borderColor = "border-[#D1D5DB]"; 
+async function Dashboard() {
+  const user = await currentUser();
+
+  console.log(
+    "[dashboard] server render:",
+    user ? { hasUser: true, clerkId: user.id, email: user.primaryEmailAddress?.emailAddress }
+      : { hasUser: false }
+  );
+
+  const payload = {
+    clerk_user_id: user?.id ?? "",
+    first_name: (user?.firstName ?? "").trim(),
+    last_name: (user?.lastName ?? "").trim(),
+    email: (user?.primaryEmailAddress?.emailAddress ?? "").trim().toLowerCase(),
+    // we should also store an image url
+  };
+
+  const response = await fetch('http://localhost:8000/api/users/signup', {
+    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  })
+
+  if (response.status != 200 && response.status != 201 && response.status != 409) {
+    console.error("Fetch error: ", response.status);
+    console.error("Error message:", response.statusText);
+  }
+
+  const textColor = "text-[#013172]";
+  const borderColor = "border-[#D1D5DB]";
   const fontClass = "font-sans";
 
-
   return (
-    <div className={`flex flex-1 ${textColor} ${fontClass}`}>
+    <div className={`flex flex-1 ${textColor}`}>
       <aside className={`w-72 bg-white border-r ${borderColor} p-4 space-y-4`}>
         <div>
           <p className="text-med mb-2">Date</p>

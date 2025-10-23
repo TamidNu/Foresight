@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app.models.dto import UserCreateRequest, UserResponse
 from app.repositories.database import get_db
 from app.repositories.user_repo import UserRepo, DuplicateUserError
-from app.services.user_service import UserService, EmailInUseError, UsernameInUseError
+from app.services.user_service import UserService, EmailInUseError, ClerkIdInUseError
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -16,7 +16,7 @@ def signup(payload: UserCreateRequest, svc: UserService = Depends(_svc)):
         return svc.signup(payload)
     except EmailInUseError as e:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
-    except UsernameInUseError as e:
+    except ClerkIdInUseError as e:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
     except DuplicateUserError as e:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
