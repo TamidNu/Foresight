@@ -1,0 +1,4 @@
+cronJobs:
+  - name: daily-retrain
+    schedule: "0 3 * * *"
+    service: foresight-train
