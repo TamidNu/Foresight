@@ -6,3 +6,5 @@ backend/venv/
 backend/__pycache__/
 backend/*.pyc
 frontend/.clerk/
+infra/foresight-data/
+notes.md
