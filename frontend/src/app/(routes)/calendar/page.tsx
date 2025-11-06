@@ -13,7 +13,7 @@ export default function Calendar() {
 
   return (
     <main className={`flex flex-1 ${textColor}`}>
-      <CalendarComponent month={9} year={2025} />
+      <CalendarComponent/>
     </main>
   );
 }

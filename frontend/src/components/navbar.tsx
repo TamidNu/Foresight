@@ -58,16 +58,10 @@ export default function Navbar({ user }: NavbarProps) {
                   <button className="hover:text-gray-300">Reports</button>
                 </SignInButton>
               </li>
-              <li>
-                <SignInButton mode="modal" forceRedirectUrl="/intelligence">
-                  <button className="hover:text-gray-300">Intelligence</button>
-                </SignInButton>
-              </li>
             </>
           )}
         </ul>
 
-        {/* Auth Section */}
         <div className="flex justify-end gap-x-6">
           {user ? (
             <UserButton

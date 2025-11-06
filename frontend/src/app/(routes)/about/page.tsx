@@ -21,7 +21,7 @@ function About() {
   return (
     <div className="flex flex-col items-center px-4 py-12 bg-gray-50 w-full">
       <h1 className="text-4xl font-bold mb-8">What is foresight?</h1>
-      <p className="text-center text-lg mb-12 max-w-2xl">
+      <p className="text-center text-lg mb-12 max-w-4xl">
          Foresight is a revenue intelligence platform that helps hotels unlock their full revenue potential through AI-powered demand prediction. We solve a critical industry problem: hotels miss out on 10-20% of potential revenue due to mispriced rooms, costing a typical 150-room hotel between $600k-$1.3M annually.
       <br />
       <br /> Our AI system detects demand signals 10-14 days before customers book by analyzing events, weather patterns, flight data, and social media through advanced web scraping and machine learning algorithms. This allows revenue managers to make proactive pricing decisions rather than reactive adjustments throughout the day.
@@ -32,7 +32,11 @@ function About() {
 
       <h1 className="text-4xl font-bold mb-8">Meet the Team</h1>
 
-      {/* Top row: 5 people */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 mb-8">
+        <Person img="/team imgs/sally_tc.jpeg" name="Sally Pigott" role="Co-Founder" />
+        <Person img="/team imgs/juliette_tc.jpeg" name="Juliette Nicault" role="Co-Founder" />
+      </div>
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
         <Person img="/team imgs/adit_tc.jpeg" name="Adit Karode" role="VP of Tech Consulting" />
         <Person img="/team imgs/jeff_tc.jpeg" name="Jeff Krapf" role="Director of Tech Consulting" />
@@ -41,7 +45,6 @@ function About() {
         <Person img="/team imgs/madhav_tc.jpeg" name="Madhav Nair" role="Developer" />
       </div>
 
-      {/* Bottom row: 5 people */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
         <Person img="/team imgs/aditya_tc.jpeg" name="Aditya Patwal" role="Developer" />
         <Person img="/team imgs/brianna_tc.jpeg" name="Brianna Quinn" role="Developer" />

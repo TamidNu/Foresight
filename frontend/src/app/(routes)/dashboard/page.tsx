@@ -59,8 +59,8 @@ async function Dashboard() {
         </div>
         <div>
           <p className="font-semibold">Occupancy (Next 7 Days)</p>
-          <p className="text-xl text-[#4981d6] mb-2">{10}%</p>
-          <ProgressBar progress={10} />
+          <p className="text-xl text-[#4981d6] mb-2">{90}%</p>
+          <ProgressBar progress={90} />
         </div>
         <div>
           <p className="font-semibold">Revenue (MTD)</p>
