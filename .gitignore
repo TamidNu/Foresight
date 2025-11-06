@@ -8,3 +8,6 @@ backend/*.pyc
 frontend/.clerk/
 infra/foresight-data/
 notes.md
+experiments/__pycache__/
+experiments/.env
+experiments/venv/
