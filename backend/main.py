@@ -5,7 +5,8 @@ from app.repositories.database import get_db
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
-from app.controllers.user_controller import router as user_router  
+from app.controllers.user_controller import router as user_router
+from app.controllers.pricing_controller import router as pricing_router  
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -17,7 +18,7 @@ app = FastAPI(
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000/"],
+    allow_origins=["http://localhost:3000"],  # Add staging/prod domains when ready
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -51,6 +52,7 @@ def get_db_info(db: Session = Depends(get_db)):
         return {"status": "error", "message": str(e)}
 
 api.include_router(user_router)
+api.include_router(pricing_router)
 app.include_router(api)
 
 if __name__ == "__main__":

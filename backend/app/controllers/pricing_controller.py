@@ -1,14 +1,39 @@
-from fastapi import APIRouter, Depends
-# from app.models.dto import PricingRequest, PricingResponse # TODO: make these DTOs
-# from app.services.ml_service import MLService # TODO: make this service
+from fastapi import APIRouter, HTTPException, status
+
+from app.models.dto import PricingRequest, PricingResponse
+from app.services.mock_pricing_engine import MockPricingEngine
 
 router = APIRouter(prefix="/pricing", tags=["pricing"])
 
-@router.get("/price") # need to be implemented after you have the pricing service and the DTOs
-def price(request: PricingRequest = Depends(PricingRequest)):
-    return MLService.price(request)
 
-
-@router.post("/quote", response_model=PricingResponse) # need to be implemented after you have the pricing service and the DTOs
-def quote(req: PricingRequest, svc: MLService = Depends(get_ml_service)):
-    return svc.quote(req)
+@router.post("/quote", response_model=PricingResponse)
+def quote(req: PricingRequest):
+    # Validate from_ <= to
+    if req.from_ > req.to:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Start date must be before or equal to end date"
+        )
+    
+    # Validate max range (90 days)
+    date_range = (req.to - req.from_).days
+    if date_range > 90:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=f"Date range cannot exceed 90 days. Requested range: {date_range} days"
+        )
+    
+    # Call MockPricingEngine and convert date objects to ISO format strings
+    engine = MockPricingEngine()
+    items, model_version = engine.quote(
+        hotel_id=req.hotel_id,
+        room_type_code=req.room_type_code,
+        start_date=req.from_.isoformat(),
+        end_date=req.to.isoformat()
+    )
+    
+    # Map to PricingResponse DTO
+    return PricingResponse(
+        items=items,
+        modelVersion=model_version
+    )
