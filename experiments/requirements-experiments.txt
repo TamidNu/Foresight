@@ -1,0 +1,5 @@
+python-dotenv>=1.0.0
+perplexityai>=0.17.0
+pandas>=2.1
+openpyxl>=3.1
+
