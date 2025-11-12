@@ -6,6 +6,7 @@ interface PricingTableProps {
 
 export function PricingTable({ items }: PricingTableProps) {
     return (
+    <div className="max-w-4xl h-35 overflow-auto border rounded shadow"> 
         <table className="min-w-full border border-gray-300">
       <thead className="bg-gray-100">
         <tr>
@@ -28,5 +29,6 @@ export function PricingTable({ items }: PricingTableProps) {
         ))}
       </tbody>
     </table>
+    </div>
     );
 }

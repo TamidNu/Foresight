@@ -43,7 +43,7 @@ React.useEffect(() => {
   const pricingPayload: QuoteParams = {
     hotel_id: 1,
     room_type_code: "DLX-QUEEN",
-    from: format(today),
+    from_: format(today),
     to: format(to),
   };
 
@@ -114,7 +114,7 @@ React.useEffect(() => {
         <div className={`bg-white border ${borderColor} rounded shadow`}>
           <div className="p-4">
             <p className="font-semibold">Revenue Performance</p>
-            <div className="h-48 bg-gray-100 flex items-center justify-center text-gray-400">
+            <div className="h-20 bg-gray-100 flex items-center justify-center text-gray-400">
               Chart
             </div>
           </div>
@@ -122,7 +122,7 @@ React.useEffect(() => {
         <div className={`bg-white border ${borderColor} rounded shadow`}>
           <div className="p-4">
             <p className="font-semibold">Demand Forecast (Next 30 Days)</p>
-            <div className="h-32 flex items-center justify-center">
+            <div className="h-32 flex items-center justify-left mb-4">
               {loading ? <p>Loading pricing...</p> : <PricingTable items={pricingItems} />}
             </div>
             <button className="bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 text-white px-4 py-2 rounded">
