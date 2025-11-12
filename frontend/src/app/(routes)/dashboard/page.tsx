@@ -5,9 +5,11 @@ import ProgressBar from "../../../components/progress-bar";
 import type { Metadata } from "next";
 import { useUser } from "@clerk/nextjs";
 import { PricingItem, PricingResponse } from "@/types/pricing";
-import { quote, QuoteParams } from "@/services/pricingService"
+import { quote, QuoteParams, getDefaultQuoteParams } from "@/services/pricingService"
 import { PricingTable } from "@/components/pricing-table";
 import { handleUserSignup } from "@/services/userService";
+import { downloadCsv } from "@/utils/downloadCSV";
+
 
 /**export const metadata: Metadata = {
   title: "Dashboard",
@@ -27,6 +29,7 @@ function Dashboard() {
   
   const [pricingItems, setPricingItems] = React.useState<PricingItem[]>([]);
   const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<Error | null>(null);
 
 React.useEffect(() => {
   if (!user || !isLoaded) return;
@@ -35,17 +38,7 @@ React.useEffect(() => {
 }, [user, isLoaded]);
 
 
-  const today = new Date();
-  const to = new Date();
-  to.setDate(today.getDate() + 30);
-  const format = (d: Date) => d.toISOString().slice(0, 10);
-
-  const pricingPayload: QuoteParams = {
-    hotel_id: 1,
-    room_type_code: "DLX-QUEEN",
-    from_: format(today),
-    to: format(to),
-  };
+ const pricingPayload = getDefaultQuoteParams();
 
   React.useEffect(() => {
   async function fetchPricing() {
@@ -53,7 +46,7 @@ React.useEffect(() => {
       const pricingData: PricingResponse = await quote(pricingPayload);
       setPricingItems(pricingData.items);
     } catch (err) {
-      console.error("Failed to fetch pricing", err);
+      setError(err as Error);
     } finally {
       setLoading(false);
     }
@@ -123,9 +116,10 @@ React.useEffect(() => {
           <div className="p-4">
             <p className="font-semibold">Demand Forecast (Next 30 Days)</p>
             <div className="h-32 flex items-center justify-left mb-4">
-              {loading ? <p>Loading pricing...</p> : <PricingTable items={pricingItems} />}
+              {loading ? <p>Loading pricing...</p> : <PricingTable items={pricingItems} loading={loading} />}
             </div>
-            <button className="bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 text-white px-4 py-2 rounded">
+            <button className="bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 text-white px-4 py-2 rounded"
+            onClick={() => downloadCsv("pricing.csv", pricingItems)}>
               Export as CSV
             </button>
           </div>
