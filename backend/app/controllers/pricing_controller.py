@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
 
 from app.models.dto import PricingRequest, PricingResponse
-from app.services.mock_pricing_engine import MockPricingEngine
+from app.services.experiments_pricing_engine import ExperimentsPricingEngine
 
 router = APIRouter(prefix="/pricing", tags=["pricing"])
 
@@ -23,8 +23,8 @@ def quote(req: PricingRequest):
             detail=f"Date range cannot exceed 90 days. Requested range: {date_range} days"
         )
     
-    # Call MockPricingEngine and convert date objects to ISO format strings
-    engine = MockPricingEngine()
+    # Call ExperimentsPricingEngine and convert date objects to ISO format strings
+    engine = ExperimentsPricingEngine()
     items, model_version = engine.quote(
         hotel_id=req.hotel_id,
         room_type_code=req.room_type_code,

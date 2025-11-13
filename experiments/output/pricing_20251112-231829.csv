@@ -1,0 +1,17 @@
+date,room_type_code,price_rec,price_min,price_max,drivers
+2025-11-10,DLX-QUEEN,143.37,123.37,163.37,Low occupancy softness|ML model
+2025-11-11,DLX-QUEEN,139.65,119.65,159.65,Midweek softness|ML model
+2025-11-12,DLX-QUEEN,139.63,119.63,159.63,Midweek softness|ML model
+2025-11-13,DLX-QUEEN,150.08,130.08,170.08,ML model
+2025-11-14,DLX-QUEEN,177.35,157.35,197.35,Weekend uplift|Event impact|ML model
+2025-11-15,DLX-QUEEN,185.06,165.06,205.06,Weekend uplift|Event impact|High occupancy|ML model|Smoothing
+2025-11-16,DLX-QUEEN,148.80,128.80,168.80,Event impact|Low occupancy softness|ML model
+2025-11-17,DLX-QUEEN,138.97,118.97,158.97,Low occupancy softness|ML model
+2025-11-18,DLX-QUEEN,130.09,110.09,150.09,Midweek softness|Low occupancy softness|ML model|Smoothing
+2025-11-19,DLX-QUEEN,131.47,111.47,151.47,Midweek softness|Low occupancy softness|ML model
+2025-11-20,DLX-QUEEN,150.08,130.08,170.08,ML model
+2025-11-21,DLX-QUEEN,186.59,166.59,206.59,Weekend uplift|Event impact|High occupancy|ML model
+2025-11-22,DLX-QUEEN,189.59,169.59,209.59,Weekend uplift|Event impact|High occupancy|ML model|Smoothing
+2025-11-23,DLX-QUEEN,157.46,137.46,177.46,Event impact|ML model
+2025-11-24,DLX-QUEEN,141.32,121.32,161.32,Low occupancy softness|ML model
+2025-11-25,DLX-QUEEN,136.75,116.75,156.75,Midweek softness|Low occupancy softness|ML model|Smoothing

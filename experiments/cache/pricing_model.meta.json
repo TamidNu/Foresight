@@ -1,0 +1,15 @@
+{
+  "feature_order": [
+    "dow",
+    "month",
+    "is_weekend",
+    "published_rate",
+    "occupancy_pct",
+    "pickup_24h",
+    "event_impact",
+    "seasonality_prior"
+  ],
+  "version": "gbrt-v1",
+  "mae_val": 0.428328481417414,
+  "n_samples": 1861
+}

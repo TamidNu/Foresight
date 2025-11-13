@@ -50,16 +50,24 @@ def compute_price_for_date(
         base += delta
         drivers.append("Event impact")
 
-    if occupancy_pct and occupancy_pct > 0:
-        base += min(15.0, occupancy_pct * 10.0)
-        drivers.append("High occupancy")
+    # Occupancy handling: treat occupancy_pct in [0,1]. Reward high, soften for very low.
+    if occupancy_pct is not None and occupancy_pct >= 0.0:
+        if occupancy_pct >= 0.8:
+            uplift = min(20.0, 8.0 + (occupancy_pct - 0.8) * 100.0 * 0.5)  # ~8..18
+            base += uplift
+            drivers.append("High occupancy")
+        elif occupancy_pct <= 0.3:
+            softness = min(15.0, 5.0 + (0.3 - occupancy_pct) * 100.0 * 0.3)  # ~5..14
+            base -= softness
+            drivers.append("Low occupancy softness")
 
     if pickup_24h and pickup_24h > 0:
-        base += min(10.0, float(pickup_24h))
+        # Non-linear, capped contribution from recent pickup
+        base += min(10.0, 2.0 + 0.8 * float(pickup_24h))
         drivers.append("High pickup")
 
     price_rec = round(base, 2)
-    price_min = round(price_rec - 20.0, 2)
+    price_min = round(max(0.0, price_rec - 20.0), 2)
     price_max = round(price_rec + 20.0, 2)
     if price_min >= price_rec:
         price_min = round(price_rec - 10.0, 2)

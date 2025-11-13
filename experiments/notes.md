@@ -1,5 +1,19 @@
 ## Experimental Pricing Engine — Step-by-Step Notes
 
+# Commands:
+
+train model:
+`python run_pricing_engine.py --train-model --data-dir infra/foresight-data --cache-dir experiments/cache --from 2025-11-10 --to 2025-11-25`#
+
+score with ML enabled:
+
+```python
+python run_pricing_engine.py \
+  --from 2025-11-10 --to 2025-11-25 \
+  --location "Dublin, Ireland" \
+  --ml-weight 0.6 --smoothing-window 3
+```
+
 This document explains exactly what happens when you run the experimental pricing engine in the `experiments/` directory: how environment variables are loaded, how the engine reads optional baseline rates from `infra/foresight-data`, how it calls the Perplexity Search API for event signals, how heuristics compute recommendations, where results are cached/written, and how to run and troubleshoot.
 
 ### 1) Where the code lives
@@ -40,7 +54,9 @@ python experiments/run_pricing_engine.py \
   --room-type "DLX-QUEEN" \
   --from 2025-11-10 \
   --to 2025-11-25 \
-  --location "Dublin, Ireland"
+  --location "Dublin, Ireland" \
+  --max-perplexity-results 8 \
+  --disable-perplexity    # optional flag; omit to enable
 ```
 
 Useful flags:
@@ -48,6 +64,13 @@ Useful flags:
 - `--data-dir` (default: `<repo>/infra/foresight-data`) — where baseline rate/ADR files may exist
 - `--cache-dir` (default: `<repo>/experiments/cache`)
 - `--out-dir` (default: `<repo>/experiments/output`)
+- `--disable-perplexity` — disable external Perplexity calls (uses cache/fallback only)
+- `--max-perplexity-results` — cap Perplexity results fetched
+- `--force-refresh-perplexity` — ignore cache and refresh Perplexity results
+- `--train-model` — train ML model from `--data-dir` and save to cache
+- `--disable-ml` — run without ML (heuristics only)
+- `--ml-weight` — ensemble weight for ML prediction in [0..1] (default 0.6)
+- `--smoothing-window` — rolling median window for smoothing (default 3)
 
 Tip: If you run the script from inside `experiments/` as your working directory, the default `--cache-dir` will become `experiments/experiments/cache`. Pass an absolute `--cache-dir` (or run from repo root) to keep paths clean.
 
@@ -70,13 +93,16 @@ Tip: If you run the script from inside `experiments/` as your working directory,
   - Tries to find a date column: one of `date`, `day`, or `dt` (case-insensitive).
   - Tries to find a rate column: one of `published_rate`, `adr`, `rate`, or `price`.
   - Builds a dictionary: `YYYY-MM-DD → baseline rate (float)`.
+- Loads operational metrics (optional) using `_try_load_operational_metrics()`:
+  - Looks for `occupancy_pct`/`occupancy`/`occ` and `pickup_24h`/`pickup` columns alongside a date column.
+  - Normalizes occupancy values like `85` to `0.85`; builds `YYYY-MM-DD → {occupancy_pct, pickup_24h}`.
 - Fetches external event impact using `perplexity_adapter.fetch_event_impacts()`:
   - Builds a cache key from `(location, from, to)` and checks `--cache-dir` for a JSON cache file.
   - If cached: returns the cached daily scores and sources.
-  - If not cached and `PERPLEXITY_API_KEY` is set:
+  - If not cached and `PERPLEXITY_API_KEY` is set (and not `--disable-perplexity`):
     - Calls Perplexity Search with a query like “major events in {city} between {from} and {to} that impact hotel demand”.
-    - Parses titles for simple indicators (weekend-ish keywords, month/weekday mentions).
-    - Produces a very naive per-day impact score: boosts Fri/Sat/Sun if enough signals are present (0.3–0.5).
+    - Extracts explicit date spans from result titles when possible (e.g., “Nov 12–14”), assigning stronger signals to those exact days (stackable, capped).
+    - Falls back to weekend boosts if no explicit spans are found.
     - Saves `{ daily: {date: score}, sources: [{title,url}, ...] }` to cache.
   - If not cached and no key: returns empty signals.
 
@@ -89,17 +115,31 @@ Tip: If you run the script from inside `experiments/` as your working directory,
   - Midweek softness: -10 for Tuesday/Wednesday
   - Seasonality: +10 (Jun), +15 (Jul), +10 (Aug), +5 (Dec)
   - Event impact: + up to 25 × `event_impact` (0..1)
-  - Occupancy/pickup: reserved for future; hooks are in place
+  - Occupancy uplift for high occupancy (≥0.8), and softening when ≤0.3
+  - Non-linear, capped pickup contribution
   - Bounds: `price_min = rec - 20`, `price_max = rec + 20`
 - Returns:
   - `price_rec`, `price_min`, `price_max`
   - `drivers`: an array of human-readable strings that explain which factors applied (Weekend uplift, Seasonality, Event impact, etc.)
+
+5. ML model — `pricing_engine.model.MLPriceModel`
+
+- Train: `python experiments/run_pricing_engine.py --train-model --data-dir infra/foresight-data`
+- Data ingestion:
+  - Flexible detection of columns for `date`, target (`published_rate`/`adr`/`rate`/`price`), optional `occupancy` and `pickup`.
+  - Uses GradientBoostingRegressor with scaling; saves to `experiments/cache/pricing_model.pkl`.
+- Inference:
+  - If a model exists and not `--disable-ml`, the engine ensembles ML and heuristics (`--ml-weight`).
+  - Guardrails clamp outputs to a slightly expanded heuristic band.
+  - Rolling-median smoothing ensures calendar consistency (`--smoothing-window`).
 
 5. Build results and metadata
 
 - Results list contains one item per date:
   - `{date, room_type_code, price_rec, price_min, price_max, drivers[]}`
 - Metadata includes the parameters, number of items, how many baseline days were found, and up to the first few Perplexity source entries.
+  - Also includes `metrics_days`, `disable_perplexity`, and `max_perplexity_results`.
+  - Also includes `ml_loaded`, `ml_weight`, and `smoothing_window`.
 
 6. Output
 
